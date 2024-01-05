@@ -5,16 +5,19 @@ import 'package:textiamge_demo/text_gradient.dart';
 import 'package:textiamge_demo/text_hello.dart';
 import 'package:textiamge_demo/text_overflow.dart';
 
+import 'default_text_demo.dart';
+import 'default_text_merge.dart';
+
 void main() {
-  // runApp(const MyApp());
-  runApp(MaterialApp(
+  runApp(const MyApp());
+  /* runApp(MaterialApp(
     home: Scaffold(
       appBar: AppBar(
         title: Text("Text Demo"),
       ),
       body: textOverflowDemo(),
     ),
-  ));
+  )); */
 }
 
 class MyApp extends StatelessWidget {
@@ -162,6 +165,12 @@ class _MyHomePageState extends State<MyHomePage> {
             StackText(),
             textGradientDemo(),
             textAlignDemo(),
+            Text(
+              "￥5.00",
+              semanticsLabel: "五元整",
+            ),
+            DefaultTextStyleDemo(),
+            defaultTextStyleMergeDemo()
           ],
         ),
       ),

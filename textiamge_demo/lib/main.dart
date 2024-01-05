@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:textiamge_demo/rich_text_demo.dart';
+import 'package:textiamge_demo/rich_text_link.dart';
 import 'package:textiamge_demo/text_align.dart';
 import 'package:textiamge_demo/text_decoration.dart';
 import 'package:textiamge_demo/text_gradient.dart';
@@ -9,15 +11,15 @@ import 'default_text_demo.dart';
 import 'default_text_merge.dart';
 
 void main() {
-  runApp(const MyApp());
-  /* runApp(MaterialApp(
+  // runApp(const MyApp());
+  runApp(MaterialApp(
     home: Scaffold(
       appBar: AppBar(
         title: Text("Text Demo"),
       ),
-      body: textOverflowDemo(),
+      body: richTextLinkDemo(),
     ),
-  )); */
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -111,14 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // const Text(
-            //   'You have pushed the button this many times:',
-            // ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headlineMedium,
-            // ),
-            Text("Hello W100", style: TextStyle(fontWeight: FontWeight.w100)),
+            //Text 基本属性
+            /* Text("Hello W100", style: TextStyle(fontWeight: FontWeight.w100)),
             Text("Hello W400", style: TextStyle(fontWeight: FontWeight.w400)),
             Text("Hello W700", style: TextStyle(fontWeight: FontWeight.w700)),
             Text("Hello W900", style: TextStyle(fontWeight: FontWeight.w900)),
@@ -170,7 +166,10 @@ class _MyHomePageState extends State<MyHomePage> {
               semanticsLabel: "五元整",
             ),
             DefaultTextStyleDemo(),
-            defaultTextStyleMergeDemo()
+            defaultTextStyleMergeDemo() */
+            Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: richTextDemo())
           ],
         ),
       ),

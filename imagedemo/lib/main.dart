@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'icon_background.dart';
 import 'icon_base_demo.dart';
+import 'icon_theme.dart';
+import 'image_blend_mode.dart';
+import 'image_center_slide.dart';
+import 'image_demo.dart';
+import 'image_fit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -98,7 +104,15 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //ICON
-            iconBaseDemo()
+            iconBaseDemo(),
+            iconBackgroundDemo(),
+            iconTheme(),
+            // imageOtherParamDemo(),
+            // unit8ListImageDemo(),
+            // imageFitDemo(),
+            // imageFitRepeatDemo(),
+            // imageCenterSlideDemo()
+            imageBlendModeDemo(),
           ],
         ),
       ),

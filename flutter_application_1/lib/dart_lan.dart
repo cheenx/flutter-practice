@@ -172,4 +172,33 @@ void test6() {
   }).whenComplete(() {
     //无论成功或失败都会走到这里
   });
+
+  Future.wait([
+    Future.delayed(Duration(seconds: 2), () {
+      return 'hello';
+    }),
+    Future.delayed(Duration(seconds: 4), () {
+      return 'world';
+    })
+  ]).then((results) {
+    print(results[0] + results[1]);
+  }).catchError((e) {
+    print(e);
+  });
+
+  Stream.fromFutures([
+    Future.delayed(Duration(seconds: 1), () {
+      return 'hello 1';
+    }),
+    Future.delayed(Duration(seconds: 2), () {
+      throw AssertionError('Error');
+    }),
+    Future.delayed(Duration(seconds: 3), () {
+      return 'hello 3';
+    })
+  ]).listen((data) {
+    print(data);
+  }, onError: (e) {
+    print(e.message());
+  }, onDone: () {});
 }

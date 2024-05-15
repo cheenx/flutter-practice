@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/asset_manager.dart';
+import 'package:flutter_application_1/login_page.dart';
+import 'package:flutter_application_1/pack_manager.dart';
+import 'package:flutter_application_1/route_manger.dart';
+import 'package:flutter_application_1/state_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +17,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      initialRoute: '/',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: CupertinoTestRoute(),
+      // onGenerateRoute: (settings) {
+      //   return MaterialPageRoute(builder: (context) {
+      //     String routeName = settings.name ?? '';
+      //     switch (routeName) {
+      //       case 'new_page':
+      //         return EchoRoute();
+      //       case 'router_test':
+      //         return RouterTestRoute();
+      //       default:
+      //         return MyHomePage(title: 'Flutter Demo Home Page');
+      //     }
+      //   });
+      // },
+      routes: {
+        'new_page': (context) => EchoRoute(),
+        'router_test': (context) => RouterTestRoute(),
+        'tip2': (context) {
+          return TipRoute(
+              text: '${ModalRoute.of(context)?.settings.arguments}');
+        },
+        'random_words': (context) => RandomWordsWidget(),
+        'assets_test': (context) => AssetsTestRoute(),
+        'login_page': (context) => LoginPageWidget(),
+        '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
+      },
     );
   }
 }
@@ -47,7 +77,21 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Echo(text: 'hello world'),
+        // child: Echo(text: 'hello world'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+                onPressed: () {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return RouterTestRoute();
+                  // }));
+                  // Navigator.pushNamed(context, 'new_page');
+                  Navigator.of(context).pushNamed('login_page');
+                },
+                child: Text('open new route'))
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/asset_manager.dart';
+import 'package:flutter_application_1/child_layout.dart';
+import 'package:flutter_application_1/linear_layout.dart';
 import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_application_1/pack_manager.dart';
 import 'package:flutter_application_1/route_manger.dart';
@@ -45,6 +47,8 @@ class MyApp extends StatelessWidget {
         'random_words': (context) => RandomWordsWidget(),
         'assets_test': (context) => AssetsTestRoute(),
         'login_page': (context) => LoginPageWidget(),
+        'layout_test': (context) => ConstrainedBoxTestRoute(),
+        'linear_layout': (context) => LinearLayoutTestRoute(),
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
       },
     );
@@ -87,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //   return RouterTestRoute();
                   // }));
                   // Navigator.pushNamed(context, 'new_page');
-                  Navigator.of(context).pushNamed('login_page');
+                  Navigator.of(context).pushNamed('linear_layout');
                 },
                 child: Text('open new route'))
           ],

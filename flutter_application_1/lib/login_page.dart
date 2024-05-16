@@ -24,10 +24,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late TextEditingController _unameController;
-  late TextEditingController _pwdController;
   FocusNode emailFocusNode = FocusNode();
+
   bool _focused = false;
+  late TextEditingController _pwdController;
+  late TextEditingController _unameController;
 
   @override
   void initState() {
@@ -84,21 +85,21 @@ class _LoginPageState extends State<LoginPage> {
               ],
             )),
         Container(
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      color: _focused ? Colors.purple : Colors.grey,
+                      width: 1.5))),
           child: TextField(
             focusNode: emailFocusNode,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 labelText: 'Email',
                 hintText: '电子邮件地址',
                 prefixIcon: Icon(Icons.email),
                 border: InputBorder.none //隐藏下划线
                 ),
           ),
-          decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-                      color: _focused ? Colors.purple : Colors.grey,
-                      width: 1.5))),
         )
       ],
     );
@@ -176,9 +177,9 @@ class FormTestRoute extends StatefulWidget {
 }
 
 class _FormTestRouteState extends State<FormTestRoute> {
-  TextEditingController _unameController = TextEditingController();
-  TextEditingController _pwdController = TextEditingController();
-  GlobalKey _formKey = GlobalKey<FormState>();
+  final GlobalKey _formKey = GlobalKey<FormState>();
+  final TextEditingController _pwdController = TextEditingController();
+  final TextEditingController _unameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +191,7 @@ class _FormTestRouteState extends State<FormTestRoute> {
           TextFormField(
             autofocus: true,
             controller: _unameController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 labelText: '用户名', hintText: '用户名或邮箱', icon: Icon(Icons.person)),
             validator: (v) {
               return v!.trim().isNotEmpty ? null : '用户名不能为空';
@@ -221,7 +222,7 @@ class _FormTestRouteState extends State<FormTestRoute> {
                                 'uname : ${_unameController.text} pwd : ${_pwdController.text}');
                           }
                         },
-                        child: Padding(
+                        child: const Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Text('登录'),
                         )))

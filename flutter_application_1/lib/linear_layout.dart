@@ -64,13 +64,15 @@ class OtherTest extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
+            Expanded(
+                child: Container(
               color: Colors.red,
               child: Column(
                 mainAxisSize: MainAxisSize.max, //无效，内层Column高度为实际高度
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [Text('hello world'), Text('I am Jack')],
               ),
-            )
+            ))
           ],
         ),
       ),

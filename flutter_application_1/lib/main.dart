@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/asset_manager.dart';
 import 'package:flutter_application_1/child_layout.dart';
+import 'package:flutter_application_1/flex_layout.dart';
+import 'package:flutter_application_1/flow_layout.dart';
+import 'package:flutter_application_1/layout_builder.dart';
 import 'package:flutter_application_1/linear_layout.dart';
 import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_application_1/pack_manager.dart';
 import 'package:flutter_application_1/route_manger.dart';
+import 'package:flutter_application_1/stack_layout.dart';
 import 'package:flutter_application_1/state_manager.dart';
 
 void main() {
@@ -49,6 +53,10 @@ class MyApp extends StatelessWidget {
         'login_page': (context) => LoginPageWidget(),
         'layout_test': (context) => ConstrainedBoxTestRoute(),
         'linear_layout': (context) => LinearLayoutTestRoute(),
+        'flex_layout': (context) => FlexLayoutTestRoute(),
+        'flow_layout': (context) => FlowLayoutTestRoute(),
+        'stack_layout': (context) => StackLayoutTestRoute(),
+        'layout_builder': (context) => LayoutBuilderTestRoute(),
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
       },
     );
@@ -91,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //   return RouterTestRoute();
                   // }));
                   // Navigator.pushNamed(context, 'new_page');
-                  Navigator.of(context).pushNamed('linear_layout');
+                  Navigator.of(context).pushNamed('layout_builder');
                 },
                 child: Text('open new route'))
           ],

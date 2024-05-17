@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/asset_manager.dart';
 import 'package:flutter_application_1/child_layout.dart';
+import 'package:flutter_application_1/clip.dart';
+import 'package:flutter_application_1/container.dart';
+import 'package:flutter_application_1/decorated_box.dart';
+import 'package:flutter_application_1/fitted_box.dart';
 import 'package:flutter_application_1/flex_layout.dart';
 import 'package:flutter_application_1/flow_layout.dart';
 import 'package:flutter_application_1/layout_builder.dart';
@@ -9,8 +13,10 @@ import 'package:flutter_application_1/linear_layout.dart';
 import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_application_1/pack_manager.dart';
 import 'package:flutter_application_1/route_manger.dart';
+import 'package:flutter_application_1/scaffold.dart';
 import 'package:flutter_application_1/stack_layout.dart';
 import 'package:flutter_application_1/state_manager.dart';
+import 'package:flutter_application_1/transform.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,6 +63,12 @@ class MyApp extends StatelessWidget {
         'flow_layout': (context) => FlowLayoutTestRoute(),
         'stack_layout': (context) => StackLayoutTestRoute(),
         'layout_builder': (context) => LayoutBuilderTestRoute(),
+        'decorated_box': (context) => DecortatedBoxTest(),
+        'transform_test': (context) => TransFormTestRoute(),
+        'container_test': (context) => ContainerTestRoute(),
+        'clip_test': (context) => ClipTestRoute(),
+        'fitted_test': (context) => FittedBoxTestRoute(),
+        'scaffold_test': (context) => ScaffoldTestRoute(),
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
       },
     );
@@ -99,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //   return RouterTestRoute();
                   // }));
                   // Navigator.pushNamed(context, 'new_page');
-                  Navigator.of(context).pushNamed('layout_builder');
+                  Navigator.of(context).pushNamed('scaffold_test');
                 },
                 child: Text('open new route'))
           ],

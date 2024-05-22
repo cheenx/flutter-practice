@@ -5,6 +5,7 @@ import 'package:flutter_application_1/asset_manager.dart';
 import 'package:flutter_application_1/child_layout.dart';
 import 'package:flutter_application_1/clip.dart';
 import 'package:flutter_application_1/container.dart';
+import 'package:flutter_application_1/custom_scroll.dart';
 import 'package:flutter_application_1/decorated_box.dart';
 import 'package:flutter_application_1/fitted_box.dart';
 import 'package:flutter_application_1/flex_layout.dart';
@@ -14,13 +15,16 @@ import 'package:flutter_application_1/layout_builder.dart';
 import 'package:flutter_application_1/linear_layout.dart';
 import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_application_1/pack_manager.dart';
+import 'package:flutter_application_1/page_view.dart';
 import 'package:flutter_application_1/route_manger.dart';
 import 'package:flutter_application_1/scaffold.dart';
 import 'package:flutter_application_1/scroll_controller.dart';
 import 'package:flutter_application_1/scroll_listener.dart';
 import 'package:flutter_application_1/sliver.dart';
+import 'package:flutter_application_1/sliver_persistent_header.dart';
 import 'package:flutter_application_1/stack_layout.dart';
 import 'package:flutter_application_1/state_manager.dart';
+import 'package:flutter_application_1/tab.dart';
 import 'package:flutter_application_1/transform.dart';
 
 void main() {
@@ -79,6 +83,11 @@ class MyApp extends StatelessWidget {
         'scroll_listener_test': (context) => ScrollNotificationTestRoute(),
         'animated_list_test': (context) => AnimatedListTestRoute(),
         'grid_view_test': (context) => GridViewTestRoute(),
+        'page_view_test': (context) => PageViewTestRoute(),
+        'tab_view_test': (context) => TabViewRoute2(),
+        'custom_scroll_test': (context) => CustomScrollTestRoute(),
+        'persistent_header_test': (context) =>
+            SliverPersistentHeaderTestRoute(),
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
       },
     );
@@ -121,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //   return RouterTestRoute();
                   // }));
                   // Navigator.pushNamed(context, 'new_page');
-                  Navigator.of(context).pushNamed('grid_view_test');
+                  Navigator.of(context).pushNamed('persistent_header_test');
                 },
                 child: Text('open new route'))
           ],

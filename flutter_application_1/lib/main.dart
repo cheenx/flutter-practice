@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/alert_dialog.dart';
 import 'package:flutter_application_1/animated_list.dart';
 import 'package:flutter_application_1/asset_manager.dart';
 import 'package:flutter_application_1/child_layout.dart';
 import 'package:flutter_application_1/clip.dart';
 import 'package:flutter_application_1/container.dart';
 import 'package:flutter_application_1/custom_scroll.dart';
+import 'package:flutter_application_1/custom_sliver.dart';
 import 'package:flutter_application_1/decorated_box.dart';
 import 'package:flutter_application_1/fitted_box.dart';
 import 'package:flutter_application_1/flex_layout.dart';
 import 'package:flutter_application_1/flow_layout.dart';
+import 'package:flutter_application_1/gesture_detector.dart';
 import 'package:flutter_application_1/grid_view.dart';
+import 'package:flutter_application_1/inherited.dart';
 import 'package:flutter_application_1/layout_builder.dart';
 import 'package:flutter_application_1/linear_layout.dart';
 import 'package:flutter_application_1/login_page.dart';
+import 'package:flutter_application_1/nested_scroll.dart';
 import 'package:flutter_application_1/pack_manager.dart';
 import 'package:flutter_application_1/page_view.dart';
+import 'package:flutter_application_1/point_listener.dart';
+import 'package:flutter_application_1/provider_test.dart';
 import 'package:flutter_application_1/route_manger.dart';
 import 'package:flutter_application_1/scaffold.dart';
 import 'package:flutter_application_1/scroll_controller.dart';
@@ -24,8 +31,12 @@ import 'package:flutter_application_1/sliver.dart';
 import 'package:flutter_application_1/sliver_persistent_header.dart';
 import 'package:flutter_application_1/stack_layout.dart';
 import 'package:flutter_application_1/state_manager.dart';
+import 'package:flutter_application_1/sync_ui.dart';
 import 'package:flutter_application_1/tab.dart';
+import 'package:flutter_application_1/theme.dart';
 import 'package:flutter_application_1/transform.dart';
+import 'package:flutter_application_1/value_listen.dart';
+import 'package:flutter_application_1/will_pop.dart';
 
 void main() {
   runApp(const MyApp());
@@ -86,6 +97,17 @@ class MyApp extends StatelessWidget {
         'page_view_test': (context) => PageViewTestRoute(),
         'tab_view_test': (context) => TabViewRoute2(),
         'custom_scroll_test': (context) => CustomScrollTestRoute(),
+        'custom_sliver_test': (context) => CustomSliverTestRoute(),
+        'nested_scroll_test': (context) => NestedScrollViewTestRoute(),
+        'will_pop_test': (context) => WillPopScopeTestRoute(),
+        'inherited_test': (context) => InheritedWidgetTestRoute(),
+        'provider_test': (context) => ProviderTestRoute(),
+        'theme_test': (context) => ThemeTestRoute1(),
+        'value_listen_test': (context) => ValueListenableRoute(),
+        'sync_ui_test': (context) => SyncUiTestRoute(),
+        'alert_dialog_test': (context) => AlertDialogTestRoute(),
+        'point_listener_test': (context) => PointListenerTestRoute(),
+        'gesture_detector_test': (context) => GestureDetectorTestRoute(),
         'persistent_header_test': (context) =>
             SliverPersistentHeaderTestRoute(),
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
@@ -104,6 +126,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  DateTime? _lastPressedAt;
   int _counter = 0;
 
   void _incrementCounter() {
@@ -114,29 +137,41 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // child: Echo(text: 'hello world'),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-                onPressed: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  //   return RouterTestRoute();
-                  // }));
-                  // Navigator.pushNamed(context, 'new_page');
-                  Navigator.of(context).pushNamed('persistent_header_test');
-                },
-                child: Text('open new route'))
-          ],
+    return WillPopScope(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: Text(widget.title),
+          ),
+          body: Center(
+            // child: Echo(text: 'hello world'),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      //   return RouterTestRoute();
+                      // }));
+                      // Navigator.pushNamed(context, 'new_page');
+                      Navigator.of(context).pushNamed('gesture_detector_test');
+                    },
+                    child: Text('open new route'))
+              ],
+            ),
+          ),
         ),
-      ),
-    );
+        onWillPop: () async {
+          if (_lastPressedAt == null ||
+              DateTime.now().difference(_lastPressedAt!) >
+                  const Duration(seconds: 1)) {
+            //两次点击间隔超过1秒则重新计时
+            _lastPressedAt = DateTime.now();
+            print('1秒内连续两次退出');
+            return false;
+          }
+          return true;
+        });
   }
 }
 
@@ -359,5 +394,32 @@ class CupertinoTestRoute extends StatelessWidget {
               child: Text('Press'),
               onPressed: () {}),
         ));
+  }
+}
+
+class WillPopScopeTestRoute extends StatefulWidget {
+  const WillPopScopeTestRoute({super.key});
+
+  @override
+  State<WillPopScopeTestRoute> createState() => _WillPopScopeTestRouteState();
+}
+
+class _WillPopScopeTestRouteState extends State<WillPopScopeTestRoute> {
+  DateTime? _lastPressAt;
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+        child: Container(
+          alignment: Alignment.center,
+          child: Text('1秒内连续两次返回键退出'),
+        ),
+        onWillPop: () async {
+          if (_lastPressAt == null ||
+              DateTime.now().difference(_lastPressAt!) > Duration(seconds: 1)) {
+            _lastPressAt = DateTime.now();
+            return false;
+          }
+          return true;
+        });
   }
 }

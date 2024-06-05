@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/hit_test_blocker.dart';
+import 'package:flutter_application_1/widgets/water_mark.dart';
 
 class PointListenerTestRoute extends StatelessWidget {
   const PointListenerTestRoute({super.key});
@@ -9,7 +11,7 @@ class PointListenerTestRoute extends StatelessWidget {
       appBar: AppBar(
         title: Text('PointListener Test'),
       ),
-      body: PointerMoveIndicatorTest1(),
+      body: StackEventTest(),
     );
   }
 }
@@ -75,4 +77,63 @@ class _PointerMoveIndicatorTest1State extends State<PointerMoveIndicatorTest1> {
       onPointerDown: (event) => print('out'),
     );
   }
+}
+
+class WaterMaskTest extends StatelessWidget {
+  const WaterMaskTest({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        wChild(1, Colors.white, 200),
+        IgnorePointer(
+          child: WaterMark(
+            painter: TextWaterMarkPainter(text: 'wendux', rotate: -20),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+Widget wChild(int index, color, double size) {
+  return Listener(
+    onPointerDown: (event) => print(index),
+    child: Container(
+      width: size,
+      height: size,
+      color: Colors.grey,
+    ),
+  );
+}
+
+class StackEventTest extends StatelessWidget {
+  const StackEventTest({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        HitTestBlocker(
+          child: xChild(1),
+        ),
+        HitTestBlocker(
+          child: xChild(2),
+        )
+      ],
+    );
+  }
+}
+
+Widget xChild(int index) {
+  return Listener(
+    behavior: HitTestBehavior.translucent,
+    onPointerDown: (event) => print(index),
+    child: Container(
+      width: 100.0,
+      height: 100.0,
+      color: Colors.grey,
+    ),
+  );
 }

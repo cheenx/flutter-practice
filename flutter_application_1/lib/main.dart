@@ -9,6 +9,8 @@ import 'package:flutter_application_1/asset_manager.dart';
 import 'package:flutter_application_1/child_layout.dart';
 import 'package:flutter_application_1/clip.dart';
 import 'package:flutter_application_1/container.dart';
+import 'package:flutter_application_1/custom_backgammon.dart';
+import 'package:flutter_application_1/custom_check_box.dart';
 import 'package:flutter_application_1/custom_scroll.dart';
 import 'package:flutter_application_1/custom_sliver.dart';
 import 'package:flutter_application_1/decorated_box.dart';
@@ -124,6 +126,8 @@ class MyApp extends StatelessWidget {
         'animated_switcher_test': (context) => AnimatedSwitcherTestRoute(),
         'animated_controller_test': (context) => AnimationControllerTestRoute(),
         'custom_widget_test': (context) => CustomeWidgetTestRoute(),
+        'custom_backgammon_test': (context) => CustomBackgammonTestRoute(),
+        'custom_checkbox_test': (context) => CustomCheckBoxTestRoute(),
         'persistent_header_test': (context) =>
             SliverPersistentHeaderTestRoute(),
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
@@ -181,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       //   return AnimationTestRoute();
                       // }));
                       // Navigator.pushNamed(context, 'new_page');
-                      Navigator.of(context).pushNamed('custom_widget_test');
+                      Navigator.of(context).pushNamed('custom_checkbox_test');
                     },
                     child: Text('open new route'))
               ],

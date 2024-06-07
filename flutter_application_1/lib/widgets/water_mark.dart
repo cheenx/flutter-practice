@@ -1,12 +1,11 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 
 class WaterMark extends StatefulWidget {
   const WaterMark(
-      {super.key, this.repeat = ImageRepeat.repeat, required this.painter});
+      {Key? key, this.repeat = ImageRepeat.repeat, required this.painter})
+      : super(key: key);
 
   final WaterMarkPainter painter;
 
@@ -21,6 +20,7 @@ class _WaterMarkState extends State<WaterMark> {
 
   @override
   void initState() {
+    // 缓存的是promise
     _memoryImageFuture = _getWaterMarkImage();
     super.initState();
   }
@@ -28,17 +28,20 @@ class _WaterMarkState extends State<WaterMark> {
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
+      // 水印尽可能大
       child: FutureBuilder(
           future: _memoryImageFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
+              // 如果单元水印还没有绘制好先返回一个空的Container
               return Container();
             } else {
+              // 如果单元水印已经绘制好，则渲染水印
               return DecoratedBox(
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: snapshot.data!,
-                          repeat: widget.repeat,
+                          image: snapshot.data!, // 背景图，即我们绘制的单元水印图片
+                          repeat: widget.repeat, // 指定重复方式
                           alignment: Alignment.topLeft,
                           scale: MediaQuery.of(context).devicePixelRatio)));
             }

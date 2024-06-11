@@ -14,6 +14,8 @@ import 'package:flutter_application_1/custom_check_box.dart';
 import 'package:flutter_application_1/custom_scroll.dart';
 import 'package:flutter_application_1/custom_sliver.dart';
 import 'package:flutter_application_1/decorated_box.dart';
+import 'package:flutter_application_1/dio_test.dart';
+import 'package:flutter_application_1/file_operation.dart';
 import 'package:flutter_application_1/fitted_box.dart';
 import 'package:flutter_application_1/flex_layout.dart';
 import 'package:flutter_application_1/flow_layout.dart';
@@ -22,7 +24,9 @@ import 'package:flutter_application_1/gesture_detector.dart';
 import 'package:flutter_application_1/custom_widget.dart';
 import 'package:flutter_application_1/grid_view.dart';
 import 'package:flutter_application_1/hero_animation.dart';
+import 'package:flutter_application_1/http_test.dart';
 import 'package:flutter_application_1/inherited.dart';
+import 'package:flutter_application_1/json_convert.dart';
 import 'package:flutter_application_1/layout_builder.dart';
 import 'package:flutter_application_1/linear_layout.dart';
 import 'package:flutter_application_1/login_page.dart';
@@ -38,6 +42,7 @@ import 'package:flutter_application_1/scroll_controller.dart';
 import 'package:flutter_application_1/scroll_listener.dart';
 import 'package:flutter_application_1/sliver.dart';
 import 'package:flutter_application_1/sliver_persistent_header.dart';
+import 'package:flutter_application_1/socket_test.dart';
 import 'package:flutter_application_1/stack_layout.dart';
 import 'package:flutter_application_1/stagger_animation.dart';
 import 'package:flutter_application_1/state_manager.dart';
@@ -46,6 +51,7 @@ import 'package:flutter_application_1/tab.dart';
 import 'package:flutter_application_1/theme.dart';
 import 'package:flutter_application_1/transform.dart';
 import 'package:flutter_application_1/value_listen.dart';
+import 'package:flutter_application_1/web_socket.dart';
 import 'package:flutter_application_1/will_pop.dart';
 
 void main() {
@@ -128,6 +134,12 @@ class MyApp extends StatelessWidget {
         'custom_widget_test': (context) => CustomeWidgetTestRoute(),
         'custom_backgammon_test': (context) => CustomBackgammonTestRoute(),
         'custom_checkbox_test': (context) => CustomCheckBoxTestRoute(),
+        'file_operation_test': (context) => FileOperationRoute(),
+        'http_test': (context) => HttpTestRoute(),
+        'dio_test': (context) => DioTestRoute(),
+        'web_socket_test': (context) => WebSocketRoute(),
+        'socket_test': (context) => SocketTestRoute(),
+        'json_convert_test': (context) => JsonConvertTestRoute(),
         'persistent_header_test': (context) =>
             SliverPersistentHeaderTestRoute(),
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page') //注册首页路由
@@ -185,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       //   return AnimationTestRoute();
                       // }));
                       // Navigator.pushNamed(context, 'new_page');
-                      Navigator.of(context).pushNamed('custom_checkbox_test');
+                      Navigator.of(context).pushNamed('json_convert_test');
                     },
                     child: Text('open new route'))
               ],

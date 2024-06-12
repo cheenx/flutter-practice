@@ -53,6 +53,7 @@ import 'package:flutter_application_1/transform.dart';
 import 'package:flutter_application_1/value_listen.dart';
 import 'package:flutter_application_1/web_socket.dart';
 import 'package:flutter_application_1/will_pop.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,6 +65,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'), // 美国英语
+        const Locale('zh', 'CN') //中文简体
+      ],
       title: 'Flutter Demo',
       initialRoute: '/',
       theme: ThemeData(

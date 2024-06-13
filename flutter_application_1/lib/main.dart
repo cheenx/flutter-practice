@@ -27,6 +27,7 @@ import 'package:flutter_application_1/hero_animation.dart';
 import 'package:flutter_application_1/http_test.dart';
 import 'package:flutter_application_1/inherited.dart';
 import 'package:flutter_application_1/json_convert.dart';
+import 'package:flutter_application_1/l10n/localization_intl.dart';
 import 'package:flutter_application_1/layout_builder.dart';
 import 'package:flutter_application_1/linear_layout.dart';
 import 'package:flutter_application_1/login_page.dart';
@@ -67,13 +68,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
+        GlobalWidgetsLocalizations.delegate,
+        DemoLocalizationsDelegate()
       ],
       supportedLocales: [
         const Locale('en', 'US'), // 美国英语
         const Locale('zh', 'CN') //中文简体
       ],
-      title: 'Flutter Demo',
+      onGenerateTitle: (context) {
+        return DemoLocalizations.of(context)?.title ?? 'Flutter APP';
+      },
       initialRoute: '/',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -182,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: Text(widget.title),
+            title: Text(DemoLocalizations.of(context)?.title ?? 'title'),
           ),
           body: Center(
             // child: Echo(text: 'hello world'),
@@ -526,6 +530,5 @@ class FadeRoute extends PageRoute {
     } else {
       return Padding(padding: EdgeInsets.zero);
     }
-    ;
   }
 }

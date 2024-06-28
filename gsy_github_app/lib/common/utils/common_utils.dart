@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gsy_github_app/common/style/gsy_style.dart';
 import 'package:gsy_github_app/common/utils/navigator_utils.dart';
 import 'package:gsy_github_app/widget/gsy_flex_button.dart';
+import 'package:path_provider/path_provider.dart';
 
 typedef StringList = List<String>;
 
@@ -11,6 +14,20 @@ class CommonUtils {
 
     CommonUtils.showCommitOptionDialog(context, list, (index) {},
         height: 150.0);
+  }
+
+  static getApplicationDocumentsPath() async {
+    Directory appDir;
+    if (Platform.isIOS) {
+      appDir = await getApplicationDocumentsDirectory();
+    } else {
+      appDir = await getApplicationSupportDirectory();
+    }
+
+    String appDocPath = "${appDir.path}/gsygithubapp";
+    Directory appPath = Directory(appDocPath);
+    await appPath.create(recursive: true);
+    return appPath.path;
   }
 
   static Future<void> showCommitOptionDialog(

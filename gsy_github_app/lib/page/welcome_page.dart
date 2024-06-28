@@ -46,7 +46,7 @@ class _WelcomePageState extends State<WelcomePage> {
     });
 
     Future.delayed(const Duration(seconds: 3, milliseconds: 500), () {
-      NavigatorUtils.goHome(context);
+      NavigatorUtils.goLogin(context);
     });
   }
 

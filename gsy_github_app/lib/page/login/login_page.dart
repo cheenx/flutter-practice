@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_github_app/common/config/config.dart';
+import 'package:gsy_github_app/common/local/local_storage.dart';
 import 'package:gsy_github_app/common/style/gsy_style.dart';
 import 'package:gsy_github_app/common/utils/common_utils.dart';
+import 'package:gsy_github_app/common/utils/toast_utils.dart';
 import 'package:gsy_github_app/widget/animated_background.dart';
 import 'package:gsy_github_app/widget/gsy_flex_button.dart';
 import 'package:gsy_github_app/widget/gsy_input_widget.dart';
 import 'package:gsy_github_app/widget/particle/particle_widget.dart';
 
 /// 登录页
-
 class LoginPage extends StatefulWidget {
   static const String sName = "login";
 
@@ -23,6 +25,47 @@ class _LoginPageState extends State<LoginPage> {
 
   String? _userName = "";
   String? _password = "";
+
+  @override
+  void initState() {
+    super.initState();
+    initParams();
+  }
+
+  void initParams() async {
+    _userName = await LocalStorage.get(Config.USER_NAME_KEY);
+    _password = await LocalStorage.get(Config.PW_KEY);
+
+    userController.value = TextEditingValue(text: _userName ?? "");
+    pwController.value = TextEditingValue(text: _password ?? "");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    userController.removeListener(_userNameChange);
+    pwController.removeListener(_passwordChange);
+  }
+
+  _userNameChange() {
+    _userName = userController.text;
+  }
+
+  _passwordChange() {
+    _password = pwController.text;
+  }
+
+  loginIn() async {
+    if (_userName == null || _userName!.isEmpty) {
+      ToastUtils.showToast(msg: "账户输入不正确");
+      return;
+    }
+
+    if (_password == null || _password!.isEmpty) {
+      ToastUtils.showToast(msg: "密码输入不正确");
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Theme.of(context).primaryColor,
                                   textColor: GSYColors.textWhite,
                                   fontSize: 16.0,
+                                  onPress: loginIn,
                                 )),
                                 const SizedBox(
                                   width: 10.0,

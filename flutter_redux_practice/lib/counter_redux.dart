@@ -42,7 +42,8 @@ class FlutterReduxApp extends StatelessWidget {
                     builder: (context, count) {
                       return Text(
                         'The button has been pushed this many times: $count',
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 18.0),
                       );
                     },
                   )
@@ -58,6 +59,7 @@ class FlutterReduxApp extends StatelessWidget {
                   onPressed: callback,
                   tooltip: 'Increment',
                   child: Icon(Icons.add),
+                  shape: const CircleBorder(),
                 );
               },
             ),

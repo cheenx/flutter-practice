@@ -76,12 +76,12 @@ class HttpManager {
     return response.data;
   }
 
-  ///清除授权
+  /// 清除授权
   clearAuthorization() {
     _tokenInterceptors.clearAuthorization();
   }
 
-  ///获取授权token
+  /// 获取授权token
   getAuthorization() async {
     return _tokenInterceptors.getAuthorization();
   }

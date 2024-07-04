@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_github_app/common/config/config.dart';
 import 'package:gsy_github_app/common/local/local_storage.dart';
+import 'package:gsy_github_app/common/localization/default_localizations.dart';
 import 'package:gsy_github_app/common/style/gsy_style.dart';
 import 'package:gsy_github_app/common/utils/common_utils.dart';
 import 'package:gsy_github_app/common/utils/toast_utils.dart';
@@ -107,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const Padding(padding: EdgeInsets.all(10.0)),
                           GSYInputWidget(
-                            hintText: "github用户名，请不要用邮箱",
+                            hintText: GSYLocalizations.i18n(context)!
+                                .login_username_hint_text,
                             iconData: GSYICons.LOGIN_USER,
                             onChanged: (String value) {
                               _userName = value;
@@ -116,7 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const Padding(padding: EdgeInsets.all(10.0)),
                           GSYInputWidget(
-                            hintText: "请输入密码",
+                            hintText: GSYLocalizations.i18n(context)!
+                                .login_password_hint_text,
                             iconData: GSYICons.LOGIN_PW,
                             obscureText: true,
                             onChanged: (String value) {
@@ -131,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                               children: [
                                 Expanded(
                                     child: GSYFlexButton(
-                                  text: "账号登录",
+                                  text: GSYLocalizations.i18n(context)!
+                                      .login_text,
                                   color: Theme.of(context).primaryColor,
                                   textColor: GSYColors.textWhite,
                                   fontSize: 16.0,
@@ -142,7 +146,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 Expanded(
                                     child: GSYFlexButton(
-                                  text: "安全登陆",
+                                  text: GSYLocalizations.i18n(context)!
+                                      .oauth_text,
                                   color: Theme.of(context).primaryColor,
                                   textColor: GSYColors.textWhite,
                                   fontSize: 16.0,
@@ -155,9 +160,10 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: () {
                               CommonUtils.showLanguageDialog(context);
                             },
-                            child: const Text(
-                              "切换语言",
-                              style: TextStyle(color: GSYColors.subTextColor),
+                            child: Text(
+                              GSYLocalizations.i18n(context)!.switch_language,
+                              style: const TextStyle(
+                                  color: GSYColors.subTextColor),
                             ),
                           ),
                           const Padding(padding: EdgeInsets.all(15.0))

@@ -60,10 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   InAppWebViewController? webViewController;
   InAppWebViewSettings settings = InAppWebViewSettings(
       isInspectable: kDebugMode,
-      mediaPlaybackRequiresUserGesture: false,
       useShouldOverrideUrlLoading: false,
-      allowsInlineMediaPlayback: true,
-      iframeAllow: "camera; microphone",
       iframeAllowFullscreen: true);
 
   PullToRefreshController? pullToRefreshController;

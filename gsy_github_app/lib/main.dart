@@ -19,8 +19,8 @@ import 'package:gsy_github_app/page/welcome_page.dart';
 import 'package:gsy_github_app/redux/gsy_state.dart';
 import 'package:redux/redux.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const FlutterReduxApp());
 }

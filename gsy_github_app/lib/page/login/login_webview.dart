@@ -1,11 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:gsy_github_app/widget/gsy_common_option_widget.dart';
 
 import '../../common/localization/default_localizations.dart';
 import '../../common/style/gsy_style.dart';
+import '../../widget/gsy_common_option_widget.dart';
 
 class LoginWebView extends StatefulWidget {
   final String url;
@@ -59,20 +61,23 @@ class _LoginWebViewState extends State<LoginWebView> {
           ),
           InAppWebView(
             key: webViewKey,
-            initialUrlRequest: URLRequest(url: WebUri(widget.url)),
+            initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
             onWebViewCreated: (controller) {
               webViewController = controller;
               webViewController?.loadUrl(
-                  urlRequest: URLRequest(url: WebUri(widget.url)));
+                  urlRequest: URLRequest(url: Uri.parse(widget.url)));
             },
             onLoadStart: (controller, url) {
               setState(() {
                 isLoading = true;
               });
             },
-            initialSettings: InAppWebViewSettings(
-              useShouldOverrideUrlLoading: true,
-            ),
+            initialOptions: Platform.isIOS
+                ? InAppWebViewGroupOptions(
+                    crossPlatform: InAppWebViewOptions(
+                    useShouldOverrideUrlLoading: true,
+                  ))
+                : null,
             shouldOverrideUrlLoading: (controller, navigationAction) async {
               var url = navigationAction.request.url!.toString();
               if (url.startsWith("gsygithubapp://authed")) {

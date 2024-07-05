@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gsy_github_app/common/config/config.dart';
 import 'package:gsy_github_app/common/local/local_storage.dart';
 import 'package:gsy_github_app/common/localization/default_localizations.dart';
+import 'package:gsy_github_app/common/net/Address.dart';
 import 'package:gsy_github_app/common/style/gsy_style.dart';
 import 'package:gsy_github_app/common/utils/common_utils.dart';
+import 'package:gsy_github_app/common/utils/navigator_utils.dart';
 import 'package:gsy_github_app/common/utils/toast_utils.dart';
+import 'package:gsy_github_app/redux/gsy_state.dart';
+import 'package:gsy_github_app/redux/login_redux.dart';
 import 'package:gsy_github_app/widget/animated_background.dart';
 import 'package:gsy_github_app/widget/gsy_flex_button.dart';
 import 'package:gsy_github_app/widget/gsy_input_widget.dart';
@@ -65,6 +70,20 @@ class _LoginPageState extends State<LoginPage> {
     if (_password == null || _password!.isEmpty) {
       ToastUtils.showToast(msg: "密码输入不正确");
       return;
+    }
+
+    ToastUtils.showToast(msg: GSYLocalizations.i18n(context)!.Login_deprecated);
+  }
+
+  oauthLogin() async {
+    var st = StoreProvider.of<GSYState>(context);
+    String? code = await NavigatorUtils.goLoginWebView(context,
+        Address.getOAuthUrl(), GSYLocalizations.i18n(context)!.oauth_text);
+
+    if (code != null && code.isNotEmpty) {
+      /// 通过 redux 去执行登录流程
+      ///
+      st.dispatch(OAuthAction(context, code));
     }
   }
 
@@ -151,6 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Theme.of(context).primaryColor,
                                   textColor: GSYColors.textWhite,
                                   fontSize: 16.0,
+                                  onPress: oauthLogin,
                                 )),
                               ],
                             ),

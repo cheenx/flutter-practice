@@ -10,16 +10,36 @@ import 'package:gsy_github_app/common/local/local_storage.dart';
 import 'package:gsy_github_app/common/localization/default_localizations.dart';
 import 'package:gsy_github_app/common/style/gsy_style.dart';
 import 'package:gsy_github_app/common/utils/navigator_utils.dart';
+import 'package:gsy_github_app/common/utils/toast_utils.dart';
 import 'package:gsy_github_app/redux/gsy_state.dart';
 import 'package:gsy_github_app/redux/locale_redux.dart';
 import 'package:gsy_github_app/widget/gsy_flex_button.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:redux/redux.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 typedef StringList = List<String>;
 
 class CommonUtils {
   static Locale? curLocale;
+
+  static copy(String? data, BuildContext context) {
+    if (data != null) {
+      Clipboard.setData(ClipboardData(text: data));
+      ToastUtils.showToast(
+          msg: GSYLocalizations.i18n(context)!.option_share_copy_success);
+    }
+  }
+
+  static launchOutURL(String? url, BuildContext context) async {
+    var gl = GSYLocalizations.i18n(context);
+    if (url != null && await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      ToastUtils.showToast(
+          msg: "${gl!.option_web_launcher_error} : ${url ?? ""}");
+    }
+  }
 
   static showLanguageDialog(BuildContext context) {
     StringList list = [

@@ -20,6 +20,8 @@ import 'package:gsy_github_app/redux/gsy_state.dart';
 import 'package:redux/redux.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const FlutterReduxApp());
 }
 

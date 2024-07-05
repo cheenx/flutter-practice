@@ -1,5 +1,6 @@
 import 'package:gsy_github_app/common/config/config.dart';
-import 'package:gsy_github_app/common/config/ignoreConfig.dart';
+
+import '../config/ignoreConfig.dart';
 
 /// 地址数据
 ///
@@ -241,8 +242,10 @@ class Address {
   }
 
   static getOAuthUrl() {
-    return "https://github.com/login/oauth/authorize?client_id=${NetConfig.CLIENT_ID}&"
-        "state=app&scope=user,gist,notificaions,read:org,workflow&redirect_uri=gsygithubapp://authed";
+    return "https://github.com/login/oauth/authorize?client_id"
+        "=${NetConfig.CLIENT_ID}&state=app&"
+        "scope=user,repo,gist,notifications,read:org,workflow&"
+        "redirect_uri=gsygithubapp://authed";
   }
 
   /// 趋势 get

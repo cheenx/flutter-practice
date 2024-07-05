@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gsy_github_app/page/home/home_page.dart';
 import 'package:gsy_github_app/page/login/login_page.dart';
+import 'package:gsy_github_app/page/login/login_webview.dart';
 import 'package:gsy_github_app/widget/never_overscroll_indicator.dart';
 
 /// 导航栏
@@ -39,6 +41,14 @@ class NavigatorUtils {
     Navigator.pushNamed(context, routeName);
   }
 
+  /// 公共打开方式
+  static NavigatorRouter(BuildContext context, Widget widget) {
+    return Navigator.push(
+        context,
+        CupertinoPageRoute(
+            builder: (context) => pageContainer(widget, context)));
+  }
+
   ///主页
   static goHome(BuildContext context) {
     Navigator.pushReplacementNamed(context, HomePage.sName);
@@ -47,6 +57,11 @@ class NavigatorUtils {
   ///登录页
   static goLogin(BuildContext context) {
     Navigator.pushReplacementNamed(context, LoginPage.sName);
+  }
+
+  /// 登录页Web页面
+  static Future goLoginWebView(BuildContext context, String url, String title) {
+    return NavigatorRouter(context, LoginWebView(url, title));
   }
 
   /// page页面的容器，做一次通用自定义

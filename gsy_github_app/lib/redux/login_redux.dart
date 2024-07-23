@@ -6,6 +6,7 @@ import 'package:gsy_github_app/redux/epic/epic_store.dart';
 import 'package:gsy_github_app/redux/gsy_state.dart';
 import 'package:redux/redux.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 /// 登录相关 redux
 final LoginReducer = combineReducers<bool?>([
@@ -57,7 +58,7 @@ class LoginMiddleware implements MiddlewareClass<GSYState> {
   call(Store<GSYState> store, action, NextDispatcher next) {
     if (action is LogoutAction) {
       UserDao.clearAll(store);
-      // WebViewCookieManager().clearCookies();
+      WebViewCookieManager().clearCookies();
       NavigatorUtils.goLogin(action.context);
     }
 

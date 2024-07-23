@@ -9,11 +9,12 @@ import 'package:gsy_github_app/common/utils/common_utils.dart';
 import 'package:gsy_github_app/common/utils/navigator_utils.dart';
 import 'package:gsy_github_app/common/utils/toast_utils.dart';
 import 'package:gsy_github_app/redux/gsy_state.dart';
-import 'package:gsy_github_app/redux/login_redux.dart';
 import 'package:gsy_github_app/widget/animated_background.dart';
 import 'package:gsy_github_app/widget/gsy_flex_button.dart';
 import 'package:gsy_github_app/widget/gsy_input_widget.dart';
 import 'package:gsy_github_app/widget/particle/particle_widget.dart';
+
+import '../../redux/login_redux.dart';
 
 /// 登录页
 class LoginPage extends StatefulWidget {

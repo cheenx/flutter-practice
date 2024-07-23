@@ -74,9 +74,8 @@ class _LoginWebViewState extends State<LoginWebView> {
             },
             initialOptions: Platform.isIOS
                 ? InAppWebViewGroupOptions(
-                    crossPlatform: InAppWebViewOptions(
-                    useShouldOverrideUrlLoading: true,
-                  ))
+                    crossPlatform:
+                        InAppWebViewOptions(useShouldOverrideUrlLoading: true))
                 : null,
             shouldOverrideUrlLoading: (controller, navigationAction) async {
               var url = navigationAction.request.url!.toString();
@@ -108,6 +107,10 @@ class _LoginWebViewState extends State<LoginWebView> {
                   isLoading = false;
                 });
               }
+            },
+            onReceivedServerTrustAuthRequest: (controller, challenge) async {
+              return ServerTrustAuthResponse(
+                  action: ServerTrustAuthResponseAction.PROCEED);
             },
           ),
           if (isLoading)
